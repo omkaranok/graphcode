@@ -29,7 +29,7 @@
         
         return false;
     }
-
+//TC-->O(n+2E)
  // Function to detect cycle in an undirected graph.
     bool solve(vector<int> &vis,vector<int> adj[],int pt,int nod){
         
