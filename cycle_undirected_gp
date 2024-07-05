@@ -1,0 +1,70 @@
+// Function to detect cycle in an undirected graph.
+    bool solve(vector<int> &vis,vector<int> adj[],int pt,int nod){
+        vis[nod]=1;
+        
+        for(auto it:adj[nod]){
+            if(!vis[it]){
+                if(solve(vis,adj,nod,it)==true){
+                    return true;
+                }
+            }else if(vis[it] && it!=pt){
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    bool isCycle(int V, vector<int> adj[]) {
+        // Code here
+        vector<int> vis(V,0);
+        
+        for(int i=0;i<V;i++){
+            if(!vis[i]){
+                if(solve(vis,adj,-1,i)==true){
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
+
+ // Function to detect cycle in an undirected graph.
+    bool solve(vector<int> &vis,vector<int> adj[],int pt,int nod){
+        
+        queue<pair<int,int>> q;
+        q.push({nod,-1});
+        vis[nod]=1;
+        
+        while(!q.empty()){
+            int nd=q.front().first;
+            int pt=q.front().second;
+            q.pop();
+            
+            
+            for(auto it:adj[nd]){
+                if(!vis[it]){
+                    vis[it]=1;
+                    q.push({it,nd});
+                }else if(vis[it] && pt!=it){
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
+    
+    bool isCycle(int V, vector<int> adj[]) {
+        // Code here
+        vector<int> vis(V,0);
+        
+        for(int i=0;i<V;i++){
+            if(!vis[i]){
+                if(solve(vis,adj,-1,i)==true) return true;
+            }
+        }
+        
+        return false;
+    }
